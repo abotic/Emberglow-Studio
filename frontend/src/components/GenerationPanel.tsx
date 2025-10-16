@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Play, Volume2, Loader } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
 import { api } from '../services/api';
@@ -6,7 +6,6 @@ import { VideoType, VideoCategory, VisualMode } from '../types';
 import { VIDEO_TYPE_CONFIG } from '../constants/videoTypes';
 import { VISUAL_MODE_CONFIG } from '../constants/visualModes';
 import { STYLE_PRESETS } from '../constants/visualModes';
-
 
 interface Props {
   selectedTopic: string | null;
@@ -22,7 +21,6 @@ interface Props {
   onGenerate: () => Promise<void>;
 }
 
-
 export const GenerationPanel: React.FC<Props> = ({
   selectedTopic,
   customTopic,
@@ -36,12 +34,30 @@ export const GenerationPanel: React.FC<Props> = ({
   setStylePreset,
   onGenerate
 }) => {
-  const { voices, showNotification } = useApp();
+  const { voices, showNotification, videos } = useApp();
   const [testingVoice, setTestingVoice] = useState(false);
   const [isStarting, setIsStarting] = useState(false);
 
   const topicToUse = useCustomTopic ? customTopic.trim() : selectedTopic;
   
+  const normalizeText = (text: string) => {
+    return text.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, ' ').trim();
+  };
+
+  const isTopicGenerating = () => {
+    if (!topicToUse) return false;
+    const normalized = normalizeText(topicToUse);
+    return videos
+      .filter(v => v.status === 'generating')
+      .some(v => normalizeText(v.display_name) === normalized);
+  };
+
+  useEffect(() => {
+    if (isStarting && isTopicGenerating()) {
+      setIsStarting(false);
+    }
+  }, [videos, isStarting, topicToUse]);
+
   const testVoice = async () => {
     setTestingVoice(true);
     try {
@@ -70,15 +86,12 @@ export const GenerationPanel: React.FC<Props> = ({
     setIsStarting(true);
     try {
       await onGenerate();
-      setTimeout(() => {
-        setIsStarting(false);
-      }, 2000);
     } catch {
       setIsStarting(false);
     }
   };
 
-  const isDisabled = !topicToUse || isStarting;
+  const isDisabled = !topicToUse || isStarting || isTopicGenerating();
 
   return (
     <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700/50 shadow-xl">

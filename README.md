@@ -2,7 +2,8 @@
 
 > One-click YouTube video generation for creators
 
-**[Demo Video Coming Soon]**
+### Emberglow Studio - Full Platform Demo
+[![Emberglow Studio](https://img.youtube.com/vi/E5cG84DNF-A/maxresdefault.jpg)](https://www.youtube.com/watch?v=E5cG84DNF-A)
 
 ## What is this?
 

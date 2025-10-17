@@ -2,9 +2,6 @@
 
 > One-click YouTube video generation for creators
 
-### Emberglow Studio - Full Platform Demo
-[![Emberglow Studio](https://img.youtube.com/vi/E5cG84DNF-A/maxresdefault.jpg)](https://www.youtube.com/watch?v=E5cG84DNF-A)
-
 ## What is this?
 
 Emberglow Studio is a production-ready application that generates complete YouTube videos from a single topic. Give it an idea, and it creates everything: an engaging script, professional voiceover, visuals (stock footage or AI-generated images), a fully rendered video, thumbnail, and YouTube metadata ready to upload.
@@ -29,11 +26,19 @@ Emberglow studio handles the entire production pipeline from concept to final ex
 
 These tools work together to create production-quality long-form content.
 
-## Why did I build this?
+## What was the goal?
 
 Creating quality YouTube content is time-intensive. You need script writing, voice recording (or expensive TTS services), video editing, asset sourcing, thumbnail design, and metadata optimization. A single 5-minute video can take 4-6 hours of work.
 
 I wanted to automate the complete video production workflow while maintaining quality and creative control. The result is a system that can generate a production-ready YouTube video from script to final render with metadata in few minutes.
+
+
+---
+
+## Demo video (click to start)
+[![Emberglow Studio](https://img.youtube.com/vi/E5cG84DNF-A/maxresdefault.jpg)](https://www.youtube.com/watch?v=E5cG84DNF-A)
+
+---
 
 ## Features
 
